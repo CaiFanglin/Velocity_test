@@ -1,0 +1,88 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>velocity</title>
+   <style type="text/css">
+    #header{
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-left:-100px;
+        margin-top:-100px;
+        width:200px;
+        height:200px;
+    }
+    .footer{
+      position:fixed;
+      right:10px;
+      bottom:10px;
+    }
+    img{
+      width:100%;
+    }
+   </style>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.ui.min.js"></script>
+    <!-- build:js scripts/main.js -->
+    <!--<script src="scripts/main.js"></script> -->
+
+ </head>
+ <body>
+     <div class="container">
+      <div id="header" class="header">
+        <img src="dlam.png"/>
+      </div>
+      <div class="footer">
+        <p>♥ from CFL</p>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var header = $('#header');
+        var img = header.find('img');
+
+         
+        $.Velocity.RegisterEffect('cfl.slideI', {
+          defaultDuration: 2000,
+          calls: [
+            [{
+              opacity:[1,0],
+              translateY:[0,50]
+            }]
+          ]
+        });
+
+
+        $.Velocity.RegisterUI('cfl.slideIO', {
+          defaultDuration: 100,
+          calls: [
+            [{
+              rotateX: [20, -20],
+              rotateY: [20, -20]
+            }]
+          ]
+        });
+        var seq = [
+        {
+          elements: img,
+          properties: 'cfl.slideI',
+          options: {
+            delay:1000,
+            duration: 2000
+          }
+        }, {
+          elements: img,
+          properties: 'callout.shake',
+          options: {
+            duration: 1000,
+            sequenceQueue: false
+          }
+        }];
+        $.Velocity.RunSequence(seq);
+      })(jQuery);  
+    </script>
+ </body>
+ </html>
+ 
